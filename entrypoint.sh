@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 
+RUNNER_NAME=${RUNNER_NAME:-"Runner-${RANDOM_STRING}"}
 CA_CERTIFICATES_PATH=${CA_CERTIFICATES_PATH:-$GITLAB_CI_MULTI_RUNNER_DATA_DIR/certs/ca.crt}
 
 create_data_dir() {
@@ -55,7 +56,7 @@ configure_ci_runner() {
           -n -u "${CI_SERVER_URL}" -r "${RUNNER_TOKEN}" --name "${RUNNER_DESCRIPTION}" --executor "${RUNNER_EXECUTOR}"
     else
       sudo -HEu ${GITLAB_CI_MULTI_RUNNER_USER} \
-        gitlab-ci-multi-runner register --config ${GITLAB_CI_MULTI_RUNNER_DATA_DIR}/config.toml
+        gitlab-ci-multi-runner register -n --config ${GITLAB_CI_MULTI_RUNNER_DATA_DIR}/config.toml
     fi
   fi
 }
