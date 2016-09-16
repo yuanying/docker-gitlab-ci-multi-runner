@@ -58,6 +58,7 @@ configure_ci_runner() {
       sudo -HEu ${GITLAB_CI_MULTI_RUNNER_USER} \
         gitlab-ci-multi-runner register -n --config ${GITLAB_CI_MULTI_RUNNER_DATA_DIR}/config.toml
     fi
+    sed -i "s/concurrent = 1/concurrent = 10/" ${GITLAB_CI_MULTI_RUNNER_DATA_DIR}/config.toml
   fi
 }
 
