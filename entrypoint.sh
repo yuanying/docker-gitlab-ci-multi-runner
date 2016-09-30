@@ -1,7 +1,8 @@
 #!/bin/bash
 set -e
 
-RUNNER_NAME=${RUNNER_NAME:-"Runner-${RANDOM_STRING}"}
+
+export RUNNER_NAME=${RUNNER_NAME:-`hostname`}
 CA_CERTIFICATES_PATH=${CA_CERTIFICATES_PATH:-$GITLAB_CI_MULTI_RUNNER_DATA_DIR/certs/ca.crt}
 
 create_data_dir() {
